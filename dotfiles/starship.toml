@@ -1,0 +1,95 @@
+format = """
+[  ](bg:#1e1e2e fg:#cdd6f4)\
+[](bg:#33ccff fg:#1e1e2e)\
+$directory\
+[](bg:#00ff99 fg:#33ccff)\
+$git_branch$git_status\
+[](bg:#fab387 fg:#00ff99)\
+$c$rust$golang$nodejs$php$java$kotlin\
+[](bg:#89b4fa fg:#fab387)\
+$docker_context$kubernetes\
+[](bg:#1e1e2e fg:#89b4fa)\
+$time$cmd_duration\
+[](fg:#1e1e2e)\
+$line_break\
+[ ❯](bold #00ff99) """
+
+[fill]
+symbol = " "
+
+[directory]
+style = "fg:#1e1e2e bg:#33ccff"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:#00ff99"
+format = "[[ $symbol $branch ](fg:#1e1e2e bg:#00ff99)]($style)"
+
+[git_status]
+style = "bg:#00ff99"
+format = "[[($all_status$ahead_behind )](fg:#1e1e2e bg:#00ff99)]($style)"
+
+[c]
+symbol = " "
+style = "bg:#fab387"
+format = "[[ $symbol($version) ](fg:#1e1e2e bg:#fab387)]($style)"
+
+[rust]
+symbol = " "
+style = "bg:#fab387"
+format = "[[ $symbol($version) ](fg:#1e1e2e bg:#fab387)]($style)"
+
+[golang]
+symbol = " "
+style = "bg:#fab387"
+format = "[[ $symbol($version) ](fg:#1e1e2e bg:#fab387)]($style)"
+
+[nodejs]
+symbol = " "
+style = "bg:#fab387"
+format = "[[ $symbol($version) ](fg:#1e1e2e bg:#fab387)]($style)"
+
+[php]
+symbol = " "
+style = "bg:#fab387"
+format = "[[ $symbol($version) ](fg:#1e1e2e bg:#fab387)]($style)"
+
+[java]
+symbol = " "
+style = "bg:#fab387"
+format = "[[ $symbol($version) ](fg:#1e1e2e bg:#fab387)]($style)"
+
+[kotlin]
+symbol = " "
+style = "bg:#fab387"
+format = "[[ $symbol($version) ](fg:#1e1e2e bg:#fab387)]($style)"
+
+[docker_context]
+symbol = " "
+style = "bg:#89b4fa"
+format = "[[ $symbol $context ](fg:#1e1e2e bg:#89b4fa)]($style)"
+
+[kubernetes]
+symbol = "☸ "
+style = "bg:#89b4fa"
+format = "[[ $symbol $context ](fg:#1e1e2e bg:#89b4fa)]($style)"
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:#1e1e2e"
+format = "[[  $time](fg:#cdd6f4 bg:#1e1e2e)]($style)"
+
+[cmd_duration]
+min_time = 2000
+style = "bg:#1e1e2e"
+format = "[[   $duration](fg:#fab387 bg:#1e1e2e)]($style)"

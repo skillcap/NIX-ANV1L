@@ -1,0 +1,15 @@
+result
+.direnv/
+.envrc
+.nix-helper/
+*.token
+*.key
+*.pem
+*.secret
+credentials.json
+auth.json
+certs/
+*.backup
+*.swp
+*~
+dotfiles/hypr/dms/
