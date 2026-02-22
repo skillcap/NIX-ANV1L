@@ -44,7 +44,7 @@
     "starship.toml".source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/starship.toml");
     "yazi/yazi.toml".text = ''
         [opener]
-        edit = [ { exec = 'nvim "$@"', block = true } ]
+        edit = [ { run = 'nvim "$@"', block = true } ]
 
         [preview]
         image_filter = "lanczos3"
