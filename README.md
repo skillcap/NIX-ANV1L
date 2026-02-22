@@ -1,5 +1,5 @@
 # ANV1L
-This repository contains my personal system configurations, managing just about everything from the base OS to user dotfiles and agressive performance tuning.
+This repository contains my personal system configurations, managing just about everything from the base OS to user dotfiles and aggressive performance tuning.
 
 # WIP
 
