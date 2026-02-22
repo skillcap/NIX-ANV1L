@@ -23,6 +23,10 @@
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake /etc/nixos#ANV1L";
       nv = "nvim";
+      cat = "bat";
+      ls = "eza";
+      l = "eza -la";
+      cd = "z";
       y = "yazi";
     };
   };
