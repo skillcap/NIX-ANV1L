@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     appimage-run
     discord-ptb
-    kdePackages.dolphin
     obsidian
     pcmanfm
     zed-editor
