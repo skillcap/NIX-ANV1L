@@ -29,6 +29,12 @@
       cd = "z";
       y = "yazi";
     };
+    plugins = [
+      {
+        name = "bang-bang";
+        src = pkgs.fishPlugins.bang-bang.src;
+      }
+    ];
   };
   programs.nushell.enable = true;
   programs.starship.enable = true;
