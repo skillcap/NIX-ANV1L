@@ -5,18 +5,15 @@
 
   systemd.user.services.rclone-gdrive = {
     Unit = {
-      Description = "Mount Google Drive via Rclone";
+      Description = "rclone mount for Google Drive";
       After = [ "network-online.target" ];
     };
     Service = {
-      Type = "notify";
-      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %h/GoogleDrive";
-      ExecStart = ''
-        ${pkgs.rclone}/bin/rclone mount gdrive: %h/GoogleDrive \
-          --config=%h/.config/rclone/rclone.conf \
-          --vfs-cache-mode writes
-      '';
-      ExecStop = "/run/wrappers/bin/fusermount -u %h/GoogleDrive";
+      Type = "simple";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount gdrive: %h/GoogleDrive --vfs-cache-mode full --vfs-cache-max-size 10G --vfs-cache-max-age 24h";
+      ExecStop = "/run/wrappers/bin/fusermount -uz %h/GoogleDrive";
+      Restart = "on-failure";
+      RestartSec = "10s";
     };
     Install = {
       WantedBy = [ "default.target" ];
