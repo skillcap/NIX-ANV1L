@@ -22,5 +22,6 @@
     gnumake
     gitui
     delta
+    jujutsu
   ];
 }
