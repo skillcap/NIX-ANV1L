@@ -79,5 +79,6 @@
 
   environment.systemPackages = with pkgs; [
     inputs.dsearch.packages.${pkgs.system}.default
+    vulkan-hdr-layer-kwin6
   ];
 }
