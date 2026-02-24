@@ -12,18 +12,22 @@
     modesetting.enable = true;
     powerManagement.enable = true;
     nvidiaSettings = true;
+    powerManagement.finegrained = false; # maybe remove for laptops
   };
+  boot.extraModprobeConfig = "options nvidia NVreg_EnableGpuFirmware=1";
 
   # --- Session & Wayland Variables ---
   environment.sessionVariables = {
     NVIDIA_VARIANT = "open";
-    VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
+    NVIDIA_DRM_OUTPUT_ASYNC = "1";
     LIBVA_DRIVER_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = "1";
+    __GL_SHADER_DISK_CACHE_SIZE = "42949672960"; # 40GB in bytes
     NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
-    WLR_DRM_NO_ATOMIC = "1";
+    NVD_BACKEND = "direct";
   };
 
   # --- Utils ---

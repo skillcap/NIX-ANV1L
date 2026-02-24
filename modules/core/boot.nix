@@ -3,6 +3,9 @@
 {
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
+    auto-optimise-store = true;
+    cores = 0;
+    max-jobs = "auto";
   };
 
   # --- Secure Boot ---
@@ -21,14 +24,53 @@
 
       # --- CPU Optimization ---
       "amd_pstate=active"                    # Let the CPU manage its own frequency
+      "amd_pstate.epp=performance"
       "initcall_blacklist=acpi_cpufreq_init" # Prevent conflicts with old driver
       "nowatchdog"                           # Disable the kernel watchdog
       "nmi_watchdog=0"                       # Disable Non-Maskable Interrupt watchdog
 
       # --- System Latency ---
       "split_lock_detect=off"                # Prevent stutters in unoptimized software
-      "transparent_hugepage=madvise"         # Faster memory pages for large assets
+      "transparent_hugepage=madvise"         # Faster memory pages for large assets on request
+      "tsc=reliable"                         # to improve cross-system latency
+      "clocksource=tsc"                      # in conjunction with above
   ];
+
+  powerManagement.cpuFreqGovernor = "performance";
+
+  # --- Memory Management & Compression ---
+  # Dynamic RAM disk for tempfiles, remove/reduce for systems with less RAM.
+  # Saves on SSD writes.
+  boot.tmp = {
+    useTmpfs = true;
+    tmpfsSize = "67%"; # ~64GB before compression
+  };
+
+  # zstd hits a 1:3 ratio, lz4 hits 1:2 with better performance.
+  # For my system:
+  # zstd: 96->~192gb @ ~3-5% potential penalty
+  # lz4: 96->~144gb @ ~0.5-1.5% potential penalty
+  # Find what works best for your needs.
+  zramSwap = {
+    enable = true;
+    algorithm = "lz4";
+    memoryPercent = 100;
+  };
+
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 180;             # zram is fast
+    "vm.vfs_cache_pressure" = 50;      # Hold onto metadata longer
+    "vm.compaction_proactiveness" = 0; # remove for servers, reduces random cpu spikes from memory defragmentation.
+    "vm.watermark_boost_factor" = 0;
+    "vm.watermark_scale_factor" = 125;
+    "vm.page_lock_unfairness" = 1;     # tldr, improves system latency
+    # networking
+    "net.core.default_qdisc" = "fq";
+    "net.ipv4.tcp_congestion_control" = "bbr";
+    "net.ipv4.tcp_fastopen" = 3; # Speeds up repeated connections
+  };
+  boot.kernelModules = [ "tcp_bbr" ];
+
 
   # --- CachyOS LTS compiled locally for native instruction set ---
   boot.kernelPackages = let
@@ -50,13 +92,6 @@
   in
     pkgs.linuxPackagesFor optimizedKernel;
 
-  # --- Memory Compression ---
-  zramSwap = {
-    enable = true;
-    algorithm = "zstd"; # Balance of speed/compression
-    memoryPercent = 100; # % compressable - (3:1)
-  };
-
   # --- Task Scheduler ---
   services.scx = {
     enable = true;
@@ -73,4 +108,10 @@
   environment.systemPackages = with pkgs; [
     sbctl # Secure boot management
   ];
+
+  # --- Reduce Reboot Delays ---
+  systemd.user.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+    DefaultTimeoutStartSec=10s
+  '';
 }
