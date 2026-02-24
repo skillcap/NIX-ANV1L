@@ -14,9 +14,24 @@
     sd
     starship
     wiki-tui
-    yazi
     zellij
   ];
+
+  programs.yazi = {
+    enable = true;
+    shellWrapperName = "y";
+    settings = {
+      opener = {
+        edit = [ { run = "nvim \"$@\""; block = true; } ];
+      };
+      preview = {
+        image_delay = 0;
+        image_filter = "lanczos3";
+        max_width = 1500;
+        max_height = 1500;
+      };
+    };
+  };
 
   programs.fish = {
     enable = true;
@@ -27,7 +42,6 @@
       ls = "eza";
       l = "eza -la";
       cd = "z";
-      y = "yazi";
     };
     plugins = [
       {
@@ -52,14 +66,5 @@
   xdg.configFile = {
     "btop".source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/btop");
     "starship.toml".source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/starship.toml");
-    "yazi/yazi.toml".text = ''
-        [opener]
-        edit = [ { run = 'nvim "$@"', block = true } ]
-
-        [preview]
-        image_filter = "lanczos3"
-        max_width = 1500
-        max_height = 1500
-      '';
   };
 }
