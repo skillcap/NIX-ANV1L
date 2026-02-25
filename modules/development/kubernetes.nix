@@ -14,6 +14,7 @@
   ];
 
   programs.fish.shellAliases = {
+    kind = "systemd-run --scope --user -p Delegate=yes kind";
     k = "kubectl";
     kgp = "kubectl get pods";
     kga = "kubectl get all";

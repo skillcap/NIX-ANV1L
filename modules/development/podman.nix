@@ -17,4 +17,6 @@
   environment.sessionVariables = {
     KIND_EXPERIMENTAL_PROVIDER = "podman";
   };
+
+  systemd.services."user@".serviceConfig.Delegate = "cpu cpuset io memory pids";
 }
