@@ -29,4 +29,6 @@
     extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     shell = pkgs.fish;
   };
+
+  hardware.wooting.enable = true;
 }
