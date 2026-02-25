@@ -6,6 +6,7 @@
     discord-ptb
     obsidian
     pcmanfm
+    vivaldi
     zed-editor
     inputs.zen-browser.packages."${pkgs.system}".default
   ];
