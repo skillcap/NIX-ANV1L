@@ -12,7 +12,6 @@
     ../../modules/hardware/audio.nix
     ../../modules/hardware/nvidia.nix
     ../../modules/hardware/RTX-5090-OC.nix
-    ../../modules/services/ai.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

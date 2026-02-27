@@ -9,6 +9,7 @@
     ./modules/desktop/media.nix
     ./modules/development/tools.nix
     ./modules/security/secrets.nix
+    ./modules/services/ai.nix
     ./modules/services/rclone.nix
   ];
 
