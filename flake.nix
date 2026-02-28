@@ -53,6 +53,19 @@
         dms.nixosModules.dank-material-shell
         dms.nixosModules.greeter
 
+        ({ ... }: {
+          nixpkgs.overlays = [
+            (final: prev: {
+              khal = prev.khal.overrideAttrs (old: {
+                outputs = [ "out" "dist" ];
+                nativeBuildInputs = builtins.filter (x:
+                  !(prev.lib.strings.hasInfix "sphinx" (x.name or x.pname or ""))
+                ) (old.nativeBuildInputs or []);
+              });
+            })
+          ];
+        })
+
         {
           home-manager.extraSpecialArgs = { inherit inputs; };
           home-manager.useGlobalPkgs = true;
