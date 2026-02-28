@@ -4,6 +4,7 @@
   imports = [
     ./modules/core/cli.nix
     ./modules/desktop/apps.nix
+    ./modules/desktop/games.nix
     ./modules/desktop/hyprland-user.nix
     ./modules/development/kubernetes.nix
     ./modules/desktop/media.nix

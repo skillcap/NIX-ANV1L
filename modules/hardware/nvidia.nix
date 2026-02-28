@@ -19,7 +19,6 @@
   # --- Session & Wayland Variables ---
   environment.sessionVariables = {
     NVIDIA_VARIANT = "open";
-    NVIDIA_DRM_OUTPUT_ASYNC = "1";
     LIBVA_DRIVER_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";

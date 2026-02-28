@@ -8,9 +8,6 @@
         softrealtime = "auto";
         renice = 9;
       };
-      custom = {
-        start = "${pkgs.bash}/bin/bash -c 'sleep 1; taskset -cp 0-7,16-23 $GAMEMODE_PID'";
-      };
     };
   };
 

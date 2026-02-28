@@ -13,3 +13,4 @@ certs/
 *.swp
 *~
 dotfiles/hypr/dms/
+/desktop/games.nix

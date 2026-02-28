@@ -92,12 +92,13 @@
   in
     pkgs.linuxPackagesFor optimizedKernel;
 
-  # --- Task Scheduler ---
-  services.scx = {
-    enable = true;
-    package = pkgs.scx.full;
-    scheduler = "scx_lavd"; # Optimized for latency
-  };
+  # I'm keeping this out for now since it doesn't work 100% with the 9950x3d.
+  # # --- Task Scheduler ---
+  # services.scx = {
+  #   enable = true;
+  #   package = pkgs.scx.full;
+  #   scheduler = "scx_lavd"; # Optimized for latency
+  # };
 
   # --- AppImage Support ---
   programs.appimage = {
