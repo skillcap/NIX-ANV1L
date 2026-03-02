@@ -21,13 +21,9 @@
     gamescopeSession.enable = false;
     package = pkgs.steam.override {
       extraEnv = {
-        SDL_VIDEODRIVER = "wayland";
-        SDL_VIDEO_DRIVER = "wayland";
         WINE_CPU_TOPOLOGY = "16:0,1,2,3,4,5,6,7,16,17,18,19,20,21,22,23";
         VKD3D_CONFIG = "dxr,dxr11";
-
-        # Moved back here to eliminate redundancy in the scripts
-        MANGOHUD_CONFIG = "position=top-right,toggle_hud=bracketright,fps,frametime,cpu_temp,gpu_temp,vram,ram,fps_limit=173,no_display";
+        MANGOHUD_CONFIG = "position=top-right,toggle_hud=bracketright,fps,frametime,cpu_temp,gpu_temp,vram,ram,core_bars,fps_limit=173,no_display";
       };
     };
   };
@@ -41,6 +37,8 @@
   environment.systemPackages = with pkgs; [
     mangohud
     (writeShellScriptBin "gs" ''
+      export SDL_VIDEODRIVER=wayland
+      export SDL_VIDEO_DRIVER=wayland
       export DXVK_HDR=1
       export PROTON_ENABLE_HDR=1
       export PROTON_ENABLE_WAYLAND=1
@@ -49,7 +47,6 @@
 
       exec gamemoderun mangohud "$@"
     '')
-    # For no HDR
     (writeShellScriptBin "gs2" ''
       exec gamemoderun mangohud "$@"
     '')
