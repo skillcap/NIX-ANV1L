@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./display.nix
     ../../modules/core/boot.nix
     ../../modules/core/fonts.nix
     ../../modules/core/system-cli.nix
