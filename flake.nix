@@ -25,7 +25,7 @@
       };
     };
 
-    dms.url = "github:AvengeMedia/DankMaterialShell";
+    dms.url = "github:AvengeMedia/DankMaterialShell/stable";
     dsearch.url = "github:AvengeMedia/danksearch";
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell";
