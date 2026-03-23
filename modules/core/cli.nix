@@ -29,6 +29,8 @@
       ls = "eza";
       l = "eza -la";
       cd = "z";
+      ai-on = "sudo systemctl start podman-vllm-agent.service podman-vllm-completions.service podman-litellm.service";
+      ai-off = "sudo systemctl stop podman-vllm-agent.service podman-vllm-completions.service podman-litellm.service";
     };
     plugins = [
       {

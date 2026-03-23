@@ -67,7 +67,6 @@ in
     exec = "appimage-run /home/skill/Applications/Cider.AppImage";
     terminal = false;
     categories = [ "Audio" "Music" ];
-    icon = "music-player";
   };
 
   home.packages = with pkgs; [
