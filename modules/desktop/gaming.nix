@@ -1,7 +1,5 @@
 { pkgs, lib, config, ... }:
 
-
-# need to generalize this later
 {
   options = {
     modules.desktop.gaming = {
@@ -36,15 +34,16 @@
       package = pkgs.steam.override {
         extraEnv = {
           WINE_CPU_TOPOLOGY = "16:0,1,2,3,4,5,6,7,16,17,18,19,20,21,22,23";
-          VKD3D_CONFIG = "dxr,dxr11";
-          MANGOHUD_CONFIG = "position=top-right,toggle_hud=bracketright,fps,frametime,cpu_temp,gpu_temp,vram,ram,core_bars,fps_limit=173,no_display";
+          VKD3D_CONFIG = "dxr,dxr11,frame_latency=1";
+          VKD3D_FRAME_RATE = "172";
+          DXVK_FRAME_RATE = "172";
+          MANGOHUD_CONFIG = "position=top-right,toggle_hud=bracketright,fps,frametime,cpu_temp,gpu_temp,vram,ram,core_bars,no_display";
           PROTON_ENABLE_NVAPI = "1";
           DXVK_ENABLE_NVAPI = "1";
         };
       };
     };
 
-    # --- Gaming Cache ---
     nix.settings = {
       substituters = [ "https://nix-gaming.cachix.org" ];
       trusted-public-keys = [ "nix-gaming.cachix.org-3:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
@@ -61,7 +60,9 @@
         export PROTON_ENABLE_HDR=1
         export PROTON_ENABLE_WAYLAND=1
         export ENABLE_HDR_WSI=1
-        export VKD3D_CONFIG="hdr,dxr,dxr11"
+        export VKD3D_CONFIG="hdr,dxr,dxr11,frame_latency=1"
+        export VKD3D_FRAME_RATE=172
+        export DXVK_FRAME_RATE=172
         export PROTON_ENABLE_NVAPI=1
         export DXVK_ENABLE_NVAPI=1
         export DXVK_CONFIG="dxvk.maxFrameLatency=1"
@@ -69,12 +70,19 @@
         exec gamemoderun mangohud "$@"
       '')
       (writeShellScriptBin "gs2" ''
+        export VKD3D_CONFIG="dxr,dxr11,frame_latency=1"
+        export VKD3D_FRAME_RATE=172
+        export DXVK_FRAME_RATE=172
+        export PROTON_ENABLE_NVAPI=1
+        export DXVK_ENABLE_NVAPI=1
         export DXVK_CONFIG="dxvk.maxFrameLatency=1"
+
         exec gamemoderun mangohud "$@"
       '')
       (writeShellScriptBin "gs3" ''
-        export DXVK_CONFIG="dxvk.maxFrameLatency=1"
-        exec gamemoderun gamescope -O DP-3 -W 3440 -H 1440 -f --mangoapp -- "$@"
+
+
+        exec gamemoderun gamescope --rt -O DP-3 -W 3440 -H 1440 -f --hdr-enabled -- "$@"
       '')
     ];
   };
