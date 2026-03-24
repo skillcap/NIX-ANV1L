@@ -14,6 +14,11 @@
       auto-optimise-store = true;
       cores = 0;
       max-jobs = "auto";
+      http-connections = 128;
+      max-substitution-jobs = 128;
+      substituters = [
+        "https://cache.nixos.org?priority=10"
+      ];
     };
 
     # --- Secure Boot ---
