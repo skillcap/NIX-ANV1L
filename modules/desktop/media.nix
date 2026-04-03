@@ -62,6 +62,6 @@ in
 
   home.packages = with pkgs; [
     playerctl
-    (import ./qbz.nix { inherit pkgs; })
+    (pkgs.callPackage ./qbz.nix { })
   ];
 }
