@@ -2,16 +2,7 @@
 
 {
   imports = [
-    ./modules/core/cli.nix
-    ./modules/desktop/apps.nix
-    ./modules/desktop/games.nix
-    ./modules/desktop/hyprland-user.nix
-    ./modules/development/kubernetes.nix
-    ./modules/desktop/media.nix
-    ./modules/development/tools.nix
-    ./modules/security/secrets.nix
-    ./modules/services/ai.nix
-    ./modules/services/rclone.nix
+    ./modules/default-user.nix
   ];
 
   home.username      = "skill";
