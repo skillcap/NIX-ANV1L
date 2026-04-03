@@ -80,9 +80,12 @@
         exec gamemoderun mangohud "$@"
       '')
       (writeShellScriptBin "gs3" ''
+        export DXVK_HDR=1
+        export ENABLE_HDR_WSI=1
+        export PROTON_ENABLE_NVAPI=1
+        export DXVK_ENABLE_NVAPI=1
 
-
-        exec gamemoderun gamescope --rt -O DP-3 -W 3440 -H 1440 -f --hdr-enabled -- "$@"
+        exec gamemoderun gamescope --rt -O DP-3 -W 3440 -H 1440 -f -e --hdr-enabled --force-grab-cursor -- mangohud "$@"
       '')
     ];
   };
