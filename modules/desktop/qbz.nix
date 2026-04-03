@@ -1,14 +1,14 @@
-{ pkgs }:
+{ pkgs, lib }:
 
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "qbz";
-  version = "1.2.0";
+  version = "1.2.1";
 
   src = pkgs.fetchFromGitHub {
     owner = "vicrodh";
     repo = "qbz";
     rev = "v${version}";
-    hash = "sha256-hiadYCBQn2+YFKam4RJ1ae+1JN5mgEjyQVyGnxr8VPA=";
+    hash = "sha256-PxtjgwShL4RNLV+X/0oAH+4b9rbvyXyaKV6nUKU0eXU=";
   };
 
   cargoRoot = "src-tauri";
@@ -20,7 +20,7 @@ pkgs.rustPlatform.buildRustPackage rec {
   npmDeps = pkgs.fetchNpmDeps {
     name = "${pname}-${version}-npm-deps";
     inherit src;
-    hash = "sha256-koLJdbtSgDoCiI+u9lhR/iJ+uY63NbVuDkS+ytLp7Bg=";
+    hash = "sha256-9TjMUOmcjmhhyFX47orxdL7LkdHPnZrR9sasdZvkvWA=";
   };
 
   env.LIBCLANG_PATH = "${pkgs.lib.getLib pkgs.llvmPackages.libclang}/lib";
