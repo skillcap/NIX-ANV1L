@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  home.packages = [ pkgs.opencode ];
   services.ollama = {
     enable = true;
     package = pkgs.ollama-cuda;
