@@ -25,6 +25,7 @@
     extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
     shell = pkgs.fish;
   };
+  nix.settings.allowed-users = [ "skill" "@wheel" ];
 
   hardware.wooting.enable = true;
 }
