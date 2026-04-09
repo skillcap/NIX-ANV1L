@@ -80,7 +80,7 @@
     languages.language = [{
         name = "nix";
         auto-format = false;
-        formatter.command = lib.getExe pkgs.nixfmt-rfc-style;
+        formatter.command = lib.getExe pkgs.nixfmt;
       }];
     themes = {
       tokyonight_transparent = {

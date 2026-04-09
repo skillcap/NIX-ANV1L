@@ -9,7 +9,7 @@
         libglvnd
         linuxPackages.nvidia_x11
         stdenv.cc.cc.lib
-        xorg.libX11       # Required for Vulkan surface creation
+        libX11       # Required for Vulkan surface creation
         wayland           # Required for Hyprland
         libxkbcommon
       ];
