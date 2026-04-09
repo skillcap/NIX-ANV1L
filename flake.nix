@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    disko.url = "github:nix-community/disko";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
     sops-nix.url = "github:Mic92/sops-nix";
@@ -52,6 +53,29 @@
         sops-nix.nixosModules.sops
         dms.nixosModules.dank-material-shell
         dms.nixosModules.greeter
+
+        {
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.skill = import ./home.nix;
+          home-manager.backupFileExtension = "backup";
+        }
+      ];
+    };
+
+    nixosConfigurations."N0M4D" = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      modules = [
+        { nixpkgs.hostPlatform = "x86_64-linux"; }
+        ./hosts/N0M4D/default.nix
+
+        disko.nixosModules.disko
+        home-manager.nixosModules.home-manager
+        # lanzaboote.nixosModules.lanzaboote
+        nix-gaming.nixosModules.platformOptimizations
+        sops-nix.nixosModules.sops
+        dms.nixosModules.dank-material-shell
 
         {
           home-manager.extraSpecialArgs = { inherit inputs; };
