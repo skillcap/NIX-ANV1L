@@ -35,9 +35,7 @@
         extraEnv = {
           WINE_CPU_TOPOLOGY = "16:0,1,2,3,4,5,6,7,16,17,18,19,20,21,22,23";
           VKD3D_CONFIG = "dxr,dxr11,frame_latency=1";
-          VKD3D_FRAME_RATE = "172";
-          DXVK_FRAME_RATE = "172";
-          MANGOHUD_CONFIG = "position=top-right,toggle_hud=bracketright,fps,frametime,cpu_temp,gpu_temp,vram,ram,core_bars,no_display";
+          MANGOHUD_CONFIG = "position=top-left,toggle_hud=bracketright,fps,frametime,cpu_temp,gpu_temp,vram,ram,core_bars,no_display,fps_limit=173,fps_limit_method=late";
           PROTON_ENABLE_NVAPI = "1";
           DXVK_ENABLE_NVAPI = "1";
         };
@@ -53,6 +51,7 @@
       mangohud
       gamescope
       heroic
+      # Helper for standard Wayland gaming
       (writeShellScriptBin "gs" ''
         export SDL_VIDEODRIVER=wayland
         export SDL_VIDEO_DRIVER=wayland
@@ -61,21 +60,19 @@
         export PROTON_ENABLE_WAYLAND=1
         export ENABLE_HDR_WSI=1
         export VKD3D_CONFIG="hdr,dxr,dxr11,frame_latency=1"
-        export VKD3D_FRAME_RATE=172
-        export DXVK_FRAME_RATE=172
         export PROTON_ENABLE_NVAPI=1
         export DXVK_ENABLE_NVAPI=1
         export DXVK_CONFIG="dxvk.maxFrameLatency=1"
+        export MANGOHUD_CONFIG="fps_limit=173,fps_limit_method=late"
 
         exec gamemoderun mangohud "$@"
       '')
       (writeShellScriptBin "gs2" ''
         export VKD3D_CONFIG="dxr,dxr11,frame_latency=1"
-        export VKD3D_FRAME_RATE=172
-        export DXVK_FRAME_RATE=172
         export PROTON_ENABLE_NVAPI=1
         export DXVK_ENABLE_NVAPI=1
         export DXVK_CONFIG="dxvk.maxFrameLatency=1"
+        export MANGOHUD_CONFIG="fps_limit=173,fps_limit_method=late"
 
         exec gamemoderun mangohud "$@"
       '')
@@ -84,6 +81,8 @@
         export ENABLE_HDR_WSI=1
         export PROTON_ENABLE_NVAPI=1
         export DXVK_ENABLE_NVAPI=1
+        export DXVK_CONFIG="dxvk.maxFrameLatency=1"
+        export MANGOHUD_CONFIG="fps_limit=173,fps_limit_method=late"
 
         exec gamemoderun gamescope --rt -O DP-3 -W 3440 -H 1440 -f -e --hdr-enabled --force-grab-cursor -- mangohud "$@"
       '')
