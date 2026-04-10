@@ -12,5 +12,6 @@ certs/
 *.backup
 *.swp
 *~
-dotfiles/hypr/dms/
+dotfiles/hypr/dms/*
+!dotfiles/hypr/dms/binds.conf
 /desktop/games.nix
