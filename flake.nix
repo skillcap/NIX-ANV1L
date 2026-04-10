@@ -40,7 +40,7 @@
       };
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, zen-browser, nix-gaming, quickshell, dms, sops-nix, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, lanzaboote, zen-browser, nix-gaming, quickshell, dms, sops-nix, disko, ... }@inputs: {
     nixosConfigurations."ANV1L" = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
@@ -72,10 +72,11 @@
 
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
-        # lanzaboote.nixosModules.lanzaboote
+        lanzaboote.nixosModules.lanzaboote
         nix-gaming.nixosModules.platformOptimizations
         sops-nix.nixosModules.sops
         dms.nixosModules.dank-material-shell
+	dms.nixosModules.greeter
 
         {
           home-manager.extraSpecialArgs = { inherit inputs; };
